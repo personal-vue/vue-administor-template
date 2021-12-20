@@ -6,6 +6,8 @@ import Layout from '@/layout/index'
 
 // 使用了vue-routerd的[Lazy Loading Routes](https://router.vuejs.org/en/advanced/lazy-loading.html)
 const dashboard = resolve => require(['@/views/dashboard/index'], resolve)
+const customers = resolve => require(['@/views/customer-manage/customers/index'], resolve)
+const orders = resolve => require(['@/views/customer-manage/orders/index'], resolve)
 
 Vue.use(Router)
 
@@ -25,6 +27,29 @@ export const constantRoutes = [
       path: 'dashboard',
       component: dashboard
     }]
+  },
+  {
+    path: '/customer-manage',
+    component: Layout,
+    redirect: '/customer-manage',
+    name: '客户管理',
+    children: [{
+      path: 'customers',
+      component: customers
+    }, {
+      path: 'orders',
+      component: orders
+    }]
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/error-page/404'),
+    hidden: true
+  },
+  {
+    path: '/401',
+    component: () => import('@/views/error-page/401'),
+    hidden: true
   }
 ]
 
