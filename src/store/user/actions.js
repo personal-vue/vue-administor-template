@@ -1,16 +1,16 @@
-import { UPDATE_USER_INFO, UPDATE_TOKENS, CLEAR_USER_INFO_AND_TOKENS, UPDATE_ROLES } from './constant'
+import { UPDATE_USER_INFO, UPDATE_TOKEN, CLEAR_USER_INFO_AND_TOKEN, UPDATE_ROLES } from './constant'
 
 const actions = {
   [UPDATE_USER_INFO]: (context, data) => {
     context.commit(UPDATE_USER_INFO, data)
   },
 
-  [UPDATE_TOKENS]: (context, data) => {
-    context.commit(UPDATE_TOKENS, data)
+  [UPDATE_TOKEN]: (context, data) => {
+    context.commit(UPDATE_TOKEN, data)
   },
 
-  [CLEAR_USER_INFO_AND_TOKENS]: (context) => {
-    context.commit(CLEAR_USER_INFO_AND_TOKENS)
+  [CLEAR_USER_INFO_AND_TOKEN]: (context) => {
+    context.commit(CLEAR_USER_INFO_AND_TOKEN)
   },
 
   [UPDATE_ROLES]: (context, roles) => {

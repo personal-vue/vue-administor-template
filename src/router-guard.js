@@ -13,7 +13,13 @@ router.beforeEach(async (to, from, next) => {
   // start progress bar
   NProgress.start()
 
-  const hasToken = store.getters.token
+  store.watch((state, getters) => getters['user/token'], (token) => {
+    console.log('token', token)
+  })
+
+  const hasToken = store.getters['user/token']
+
+  console.log('hasToken', hasToken, store.getters, store.getters['user/token'])
 
   if (hasToken) { // 判断是否有token
     if (to.path === '/login') {
@@ -21,7 +27,9 @@ router.beforeEach(async (to, from, next) => {
 
       NProgress.done()
     } else {
-      const hasRoles = store.getters.roles && store.getters.roles.length > 0
+      const hasRoles = store.getters['user/roles'] && store.getters['user/roles'].length > 0
+
+      console.log('hasRoles: ', hasRoles, store.getters, store.getters['user/roles'])
 
       if (hasRoles) {
         next()
@@ -39,7 +47,7 @@ router.beforeEach(async (to, from, next) => {
 
           // hack method to ensure that addRoutes is complete
           // set the replace: true, so the navigation will not leave a history record
-          next({ ...to, replace: true })
+          // next({ ...to, replace: true })
         } catch (error) {
           // remove token and go to login page to re-login
           // await store.dispatch('user/clearUserInfoAndTokens')

@@ -1,8 +1,6 @@
 const getters = {
   userInfo: (state) => state.userInfo,
-  token: (state) => state.tokens.token,
-  refreshToken: (state) => state.tokens.refreshToken,
-  expiredTime: (state) => state.tokens.expiredTime,
+  token: (state) => state.token,
   roles: (state) => state.roles
 }
 

@@ -1,6 +1,6 @@
 const initialState = {
   userInfo: null,
-  tokens: null,
+  token: '',
   roles: []
 }
 
