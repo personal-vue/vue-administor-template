@@ -14,6 +14,8 @@ router.beforeEach(async (to, from, next) => {
   NProgress.start()
 
   let hasToken
+
+  // 监控vuex，以取到异步数据
   store.watch((state) => {
     console.log('state: ', state)
     hasToken = state.user.token

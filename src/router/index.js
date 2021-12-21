@@ -31,14 +31,21 @@ export const constantRoutes = [
   {
     path: '/customer-manage',
     component: Layout,
-    redirect: '/customer-manage',
+    redirect: '/customer-manage/customers',
     name: '客户管理',
+    meta: {
+      title: 'Customer-manage',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
     children: [{
       path: 'customers',
-      component: customers
+      component: customers,
+      meta: { title: 'customers', icon: 'dashboard', affix: true }
     }, {
       path: 'orders',
-      component: orders
+      component: orders,
+      meta: { title: 'orders', icon: 'dashboard', affix: true }
     }]
   },
   {
