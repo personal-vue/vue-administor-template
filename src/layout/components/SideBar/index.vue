@@ -1,41 +1,36 @@
 <template>
   <el-menu
       class="el-menu-vertical-demo"
-      :collapse="isCollapse"
       background-color="#545c64"
       text-color="#fff"
+      :collapse="isCollapse"
+      :collapse-transition="false"
       :default-active="defaultOpen"
-      active-text-color="#ffd04b">
-      <div v-for="(menu, index) in menus" :key="index">
-        <!-- 没有子菜单 -->
-        <el-menu-item
-          v-if="!menu.children"
-          :index="menu.path"
-          @click.native.stop="toTarget(menu)">
-          <i :class="menu.icon"></i>
-          {{ menu.label }}
-        </el-menu-item>
-        <!-- 存在子菜单 -->
-        <el-submenu
-          v-else
-          :index="menu.path">
-          <template slot="title" v-if="menu.label">
-            <i :class="menu.icon"></i>
-            <span>{{ menu.label }}</span>
+    >
+      <template v-for="(menu, index) in menus" >
+        <el-submenu v-if="menu.children" :key="index" :index="menu.path">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span slot="title">{{ menu.label }}</span>
           </template>
-          <el-menu-item-group v-if="menu.children">
-              <el-menu-item
-                :index="child.path"
-                v-for="(child, childIndex) in menu.children"
-                @click.native.stop="toTarget(child)"
-                :key="childIndex">
-                <i :class="child.icon"></i>
-                {{ child.label }}
-              </el-menu-item>
+          <el-menu-item-group>
+            <el-menu-item
+              v-for="(subMenu, subIndex) in menu.children"
+              :key="subIndex"
+              :index="subMenu.path"
+              @click.native.stop="toTarget(subMenu)">{{ subMenu.label }}</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-      </div>
-    </el-menu>
+        <el-menu-item
+          v-else
+          :key="index"
+          :index="menu.path"
+          @click.native.stop="toTarget(menu)">
+          <i class="el-icon-menu"></i>
+          <span slot="title">{{ menu.label }}</span>
+        </el-menu-item>
+      </template>
+  </el-menu>
 </template>
 
 <script>
@@ -92,12 +87,15 @@ export default {
 
 <style lang="scss" scoped>
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
+  width: 15vw;
+  min-height: 400px;
 }
+
 .el-menu-vertical-demo /deep/ .el-submenu .el-submenu__title {
   height: 2rem;
 }
-/deep/ .el-menu-item, .el-submenu__title {
+/deep/ .el-menu-item,
+.el-submenu__title {
   height: 2rem;
   line-height: 2rem;
 }
@@ -106,5 +104,8 @@ export default {
 }
 /deep/ .el-menu-item-group__title {
   padding: unset;
+}
+.el-menu-item {
+  min-width: unset;
 }
 </style>

@@ -1,6 +1,10 @@
 <template>
   <div class="navbar flex-row main-between secondary-center">
-    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+    <section class="flex-row secondary-center">
+      <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
+
+      <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+    </section>
 
     <div class="right-menu">
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
@@ -45,6 +49,9 @@ export default {
     ...mapGetters('user', ['userInfo'])
   },
   methods: {
+    toggleSideBar () {
+      this.$store.dispatch('app/toggleSidebar')
+    },
     async logout () {
       // await this.$store.dispatch('user/logout')
       this.$store.dispatch('user/clearUserInfoAndToken')

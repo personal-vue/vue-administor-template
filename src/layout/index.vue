@@ -1,8 +1,10 @@
 <template>
-    <div class="flex-row main-between box">
+    <div class="flex-row box">
         <Sidebar class="side"></Sidebar>
         <div class="content">
-          <Navbar></Navbar>
+          <section>
+            <Navbar></Navbar>
+          </section>
           <AppMain></AppMain>
         </div>
     </div>
@@ -28,11 +30,11 @@ export default {
   overflow: hidden;
 }
 .side {
-  width: 15vw;
   height: 100%;
 }
 .content {
-  width: 85vw;
+  min-width: 85vw;
   height: 100%;
+  flex: 1;
 }
 </style>

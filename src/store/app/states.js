@@ -2,7 +2,7 @@ const states = {
   sidebar: {
     opened: true,
     withoutAnimation: false,
-    defaultOpen: '/'
+    defaultOpen: '/dashboard'
   }
 }
 
