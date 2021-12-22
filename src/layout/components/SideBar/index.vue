@@ -60,9 +60,11 @@ export default {
       return !this.sidebar.opened
     },
     defaultOpen () {
+      console.log('defaultOpen: ', this.sidebar.defaultOpen)
       return this.sidebar.defaultOpen
     },
     menus () {
+      console.log('permission_routes: ', this.permission_routes)
       return this.permission_routes.filter((item) => item.path !== '*')
     }
   },
@@ -74,7 +76,7 @@ export default {
 
       this.$router.push({
         name: item.name
-      }).catch(() => {})
+      })
     }
   }
 }

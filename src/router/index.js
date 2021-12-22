@@ -19,6 +19,12 @@ const positions = resolve => require(['@/views/system-manage/positions-manage/in
 
 Vue.use(Router)
 
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch(err => err)
+}
+
 // 所有权限通用路由表
 // 如首页和登录页和一些不用权限的公用页面
 export const constantRoutes = [
@@ -57,7 +63,8 @@ export const asyncRoutes = [
       meta: {
         title: '主页',
         icon: 'icon-huaban',
-        roles: [1, 2, 3] // you can set roles in root nav
+        roles: [1, 2, 3], // you can set roles in root nav
+        affix: true
       }
     }]
   },
@@ -78,7 +85,7 @@ export const asyncRoutes = [
       meta: {
         title: '客户',
         icon: 'icon-kehu',
-        affix: true
+        affix: false
       }
     }, {
       path: 'orders',
@@ -87,7 +94,7 @@ export const asyncRoutes = [
       meta: {
         title: '订单',
         icon: 'icon-dingdan',
-        affix: true
+        affix: false
       }
     }]
   },
@@ -109,7 +116,7 @@ export const asyncRoutes = [
         title: '用户',
         icon: 'icon-yonghuguanli',
         roles: [2, 3],
-        affix: true
+        affix: false
       }
     }, {
       path: 'roles-manage',
@@ -119,7 +126,7 @@ export const asyncRoutes = [
         title: '角色',
         icon: 'icon-guanliyuan_jiaoseguanli',
         roles: [2, 3],
-        affix: true
+        affix: false
       }
     }, {
       path: 'positions-manage',
@@ -129,7 +136,7 @@ export const asyncRoutes = [
         title: '岗位',
         icon: 'icon-gangweiguanli',
         roles: [2, 3],
-        affix: true
+        affix: false
       }
     }, {
       path: 'departments-manage',
@@ -139,16 +146,17 @@ export const asyncRoutes = [
         title: '部门',
         icon: 'icon-bumenguanli',
         roles: [2, 3],
-        affix: true
+        affix: false
       }
     }, {
       path: 'menus-manage',
       component: menus,
+      name: 'menus',
       meta: {
         title: '菜单',
         icon: 'icon-xitongguanli-caidanguanli',
         roles: [2, 3],
-        affix: true
+        affix: false
       }
     }, {
       path: 'logs-manage',
@@ -158,7 +166,7 @@ export const asyncRoutes = [
         title: '日志',
         icon: 'icon-rizhiguanli',
         roles: [1, 2, 3],
-        affix: true
+        affix: false
       }
     }]
   },

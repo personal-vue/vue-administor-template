@@ -44,10 +44,11 @@ export default {
   },
   computed: {
     visitedViews () {
-      return this.$store.state.app.visitedViews
+      return this.$store.state.tagsView.visitedViews
     },
     routes () {
-      return this.$store.state.permission.routes
+      // console.log('this.$store.state.permission: ', this.$store.state.tagView)
+      return this.$store.state.permission.addRoutes
     }
   },
   watch: {
@@ -76,6 +77,7 @@ export default {
     },
     filterAffixTags (routes, basePath = '/') {
       let tags = []
+      console.log('routes: ', routes)
       routes.forEach(route => {
         if (route.meta && route.meta.affix) {
           const tagPath = path.resolve(basePath, route.path)
@@ -97,17 +99,23 @@ export default {
     },
     initTags () {
       const affixTags = this.affixTags = this.filterAffixTags(this.routes)
+
+      console.log('this.initTags: ', this.routes)
+
       for (const tag of affixTags) {
         // Must have tag name
         if (tag.name) {
-          this.$store.dispatch('app/addVisitedView', tag)
+          this.$store.dispatch('tagsView/addVisitedView', tag)
         }
       }
     },
     addTags () {
       const { name } = this.$route
+
+      console.log('this.$store.state.permission: ', this.$store.state.tagsView)
       if (name) {
-        this.$store.dispatch('app/addView', this.$route)
+        // console.log('route: ', deepClone(this.$route))
+        this.$store.dispatch('tagsView/addView', this.$route)
       }
       return false
     },
@@ -119,7 +127,7 @@ export default {
             this.$refs.scrollPane.moveToTarget(tag)
             // when query is different then update
             if (tag.to.fullPath !== this.$route.fullPath) {
-              this.$store.dispatch('app/updateVisitedView', this.$route)
+              this.$store.dispatch('tagsView/updateVisitedView', this.$route)
             }
             break
           }
@@ -127,7 +135,7 @@ export default {
       })
     },
     refreshSelectedTag (view) {
-      this.$store.dispatch('app/delCachedView', view).then(() => {
+      this.$store.dispatch('tagsView/delCachedView', view).then(() => {
         const { fullPath } = view
         this.$nextTick(() => {
           this.$router.replace({
@@ -137,7 +145,7 @@ export default {
       })
     },
     closeSelectedTag (view) {
-      this.$store.dispatch('app/delView', view).then(({ visitedViews }) => {
+      this.$store.dispatch('tagsView/delView', view).then(({ visitedViews }) => {
         if (this.isActive(view)) {
           this.toLastView(visitedViews, view)
         }
@@ -145,12 +153,13 @@ export default {
     },
     closeOthersTags () {
       this.$router.push(this.selectedTag)
-      this.$store.dispatch('app/delOthersViews', this.selectedTag).then(() => {
+      this.$store.dispatch('tagsView/delOthersViews', this.selectedTag).then(() => {
         this.moveToCurrentTag()
       })
     },
     closeAllTags (view) {
-      this.$store.dispatch('app/delAllViews').then(({ visitedViews }) => {
+      this.$store.dispatch('tagsView/delAllViews').then(({ visitedViews }) => {
+        debugger
         if (this.affixTags.some(tag => tag.path === view.path)) {
           return
         }
@@ -160,6 +169,7 @@ export default {
     toLastView (visitedViews, view) {
       const latestView = visitedViews.slice(-1)[0]
       if (latestView) {
+        this.$store.dispatch('app/resetDefaultOpen')
         this.$router.push(latestView.fullPath)
       } else {
         // now the default is to redirect to the home page if there is no tags-view,
@@ -211,7 +221,6 @@ export default {
       display: inline-block;
       position: relative;
       cursor: pointer;
-      height: 26px;
       line-height: 26px;
       border: 1px solid #d8dce5;
       color: #495060;

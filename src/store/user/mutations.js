@@ -1,4 +1,4 @@
-import { UPDATE_USER_INFO, UPDATE_TOKEN, CLEAR_USER_INFO_AND_TOKEN, UPDATE_ROLES } from './constant'
+import { UPDATE_USER_INFO, UPDATE_TOKEN, CLEAR_USER, UPDATE_ROLES } from './constant'
 
 const mutations = {
   /**
@@ -19,9 +19,10 @@ const mutations = {
   /**
    * @description 清空token和用户信息
    */
-  [CLEAR_USER_INFO_AND_TOKEN]: (state) => {
+  [CLEAR_USER]: (state) => {
     state.userInfo = null
     state.token = ''
+    state.roles = []
   },
 
   /**

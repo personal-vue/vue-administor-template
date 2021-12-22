@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "circular-json": "^0.5.9",
     "echarts": "^5.2.2",
     "element-ui": "^2.15.6",
     "nprogress": "^0.2.0",

@@ -44,8 +44,9 @@ export default {
       this.$store.dispatch('app/toggleSidebar')
     },
     async logout () {
-      // await this.$store.dispatch('user/logout')
-      this.$store.dispatch('user/clearUserInfoAndToken')
+      this.$store.dispatch('user/clearUser')
+      this.$store.dispatch('app/resetDefaultOpen')
+      this.$store.dispatch('app/delAllViews')
 
       // 重载页面，router.beforeEach()判断了当不存在token的时候，回到登录页
       // 不使用$router.push()跳转，因为不会清空路由
