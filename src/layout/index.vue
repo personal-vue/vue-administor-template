@@ -1,24 +1,26 @@
 <template>
     <div class="flex-row box">
-        <Sidebar class="side"></Sidebar>
+        <sidebar class="side" />
         <div class="content">
           <section>
-            <Navbar></Navbar>
+            <navbar />
+            <tags-view />
           </section>
-          <AppMain></AppMain>
+          <app-main />
         </div>
     </div>
 </template>
 
 <script>
-import { AppMain, Navbar, Sidebar } from './components'
+import { AppMain, Navbar, Sidebar, TagsView } from './components'
 
 export default {
   name: 'Layout',
   components: {
     Sidebar,
     AppMain,
-    Navbar
+    Navbar,
+    TagsView
   },
   methods: {}
 }
