@@ -10,6 +10,7 @@ import '@/utils/rem.js'
 
 import './router-guard' // 前端控制访问权限
 
+import '@/assets/iconfont/iconfont.css'
 import '@/assets/css/index.scss' // 全局scss样式
 
 Vue.config.productionTip = false

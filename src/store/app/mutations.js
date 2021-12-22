@@ -5,7 +5,6 @@ const mutations = {
  * 更新Sidebar信息
  */
   [TOGGLE_SIDEBAR]: (state) => {
-    console.log('state: ', state)
     state.sidebar.opened = !state.sidebar.opened
     state.sidebar.withoutAnimation = false
   },

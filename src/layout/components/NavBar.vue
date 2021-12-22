@@ -13,18 +13,9 @@
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
-          <router-link to="/profile/index">
-            <el-dropdown-item>Profile</el-dropdown-item>
+          <router-link to="/personal-manage">
+            <el-dropdown-item>个人账户</el-dropdown-item>
           </router-link>
-          <router-link to="/">
-            <el-dropdown-item>Dashboard</el-dropdown-item>
-          </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">
-            <el-dropdown-item>Github</el-dropdown-item>
-          </a>
-          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
-            <el-dropdown-item>Docs</el-dropdown-item>
-          </a>
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">Log Out</span>
           </el-dropdown-item>
@@ -55,7 +46,11 @@ export default {
     async logout () {
       // await this.$store.dispatch('user/logout')
       this.$store.dispatch('user/clearUserInfoAndToken')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+
+      // 重载页面，router.beforeEach()判断了当不存在token的时候，回到登录页
+      // 不使用$router.push()跳转，因为不会清空路由
+      // 重载页面，清空路由，更换用户登录，才能展示展示最新的路由菜单
+      window.location.reload()
     }
   }
 }

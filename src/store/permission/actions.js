@@ -6,7 +6,8 @@ const actions = {
   [SET_ROUTES]: ({ commit }, roles) => {
     return new Promise(resolve => {
       let accessedRoutes
-      if (roles.includes('admin')) {
+
+      if (roles.includes(4)) { // 如果该用户是开发者，则可以访问所有页面
         accessedRoutes = asyncRoutes || []
       } else {
         accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)

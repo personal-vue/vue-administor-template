@@ -5,7 +5,6 @@ const mutations = {
  * 更新用户信息
  */
   [UPDATE_USER_INFO]: (state, userInfo) => {
-    console.log('state userInfo: ', state)
     state.userInfo = Object.assign({}, state.userInfo, userInfo)
   },
 
@@ -14,7 +13,6 @@ const mutations = {
  * tokens存储token，refreshToken(刷新token)，expiredTime(过期时间)
  */
   [UPDATE_TOKEN]: (state, token) => {
-    console.log('state token: ', state)
     state.token = token
   },
 

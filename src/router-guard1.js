@@ -13,20 +13,12 @@ router.beforeEach(async (to, from, next) => {
   // start progress bar
   NProgress.start()
 
-  // store.watch((state, getters) => getters['user/token'], (token) => {
-  //   console.log('token', token)
-  // })
   let hasToken
   store.watch((state) => {
-    console.log('state: ', state)
     hasToken = state.user.token
   })
 
-  console.log('token: ', hasToken)
-
   // const hasToken = store.getters['user/token']
-
-  console.log('hasToken', hasToken, store.getters, store.getters['user/token'])
 
   if (hasToken) { // 判断是否有token
     if (to.path === '/login') {
@@ -37,8 +29,6 @@ router.beforeEach(async (to, from, next) => {
       // const hasRoles = store.getters['user/roles'] && store.getters['user/roles'].length > 0
 
       const hasRoles = store.getters['user/userInfo'] && store.getters['user/userInfo'].identity
-
-      console.log('hasRoles: ', hasRoles, store.getters, store.getters['user/roles'])
 
       if (hasRoles) {
         next()
@@ -76,7 +66,6 @@ router.beforeEach(async (to, from, next) => {
       //   //     next({ ...to, replace: true }) // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
       //   //   })
       //   // }).catch(err => {
-      //   //   console.log(err)
       //   // })
       // } else {
       //   next() // 当有用户权限的时候，说明所有可访问路由已生成 如访问没权限的全面会自动进入404页面

@@ -69,7 +69,8 @@ export default {
   methods: {
     ...mapActions({
       updateUserInfo: 'user/updateUserInfo',
-      updateToken: 'user/updateToken'
+      updateToken: 'user/updateToken',
+      updateRoles: 'user/updateRoles'
     }),
     login () {
       if (!this.formLabelAlign.username || !this.formLabelAlign.password) return this.toastInfo('请输入用户名和密码', 'error')
@@ -79,6 +80,13 @@ export default {
         console.log('data: ', userInfo)
         this.updateUserInfo(userInfo)
         this.updateToken(token)
+        if (userInfo.identity) {
+          let roles = []
+          roles.push(userInfo.identity)
+
+          // 存储用户角色
+          this.updateRoles(roles)
+        }
 
         this.$router.push({
           path: '/'
