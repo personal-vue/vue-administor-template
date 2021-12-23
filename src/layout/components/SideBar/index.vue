@@ -98,14 +98,6 @@ export default {
   min-height: 400px;
 }
 
-.el-menu-vertical-demo /deep/ .el-submenu .el-submenu__title {
-  height: 2rem;
-}
-/deep/ .el-menu-item,
-.el-submenu__title {
-  height: 2rem;
-  line-height: 2rem;
-}
 .el-menu-item-group__title {
   padding: 0;
 }

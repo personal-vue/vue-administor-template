@@ -182,8 +182,8 @@ export default {
   z-index:1;
 }
 .form {
-  width: 30vw;
-  height: calc( 40vw * 0.5 );
+  width: 25vw;
+  height: calc( 40vw * 0.35 );
 
   box-shadow: 0px 0px 10px #000;
   border-radius: 10px;
@@ -197,7 +197,7 @@ export default {
   transform: translate(-50%, -60%);
 }
 .form-back {
-  height: calc( 50vw * 0.5 );
+  height: calc( 50vw * 0.35 );
 }
 .form-item {
   width: 100%;
