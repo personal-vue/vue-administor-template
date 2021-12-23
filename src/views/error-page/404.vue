@@ -41,7 +41,7 @@ export default {
 }
 .wscn-http404 {
   position: relative;
-  width: 1200px;
+  width: 1000px;
   padding: 0 50px;
   overflow: hidden;
   .pic-404 {
@@ -207,6 +207,7 @@ export default {
       opacity: 0;
       font-size: 14px;
       line-height: 36px;
+      line-height: 36px; //解决自动换算成rem的问题
       cursor: pointer;
       animation-name: slideUp;
       animation-duration: 0.5s;

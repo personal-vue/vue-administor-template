@@ -29,6 +29,17 @@ Router.prototype.push = function push (location, onResolve, onReject) {
 // 如首页和登录页和一些不用权限的公用页面
 export const constantRoutes = [
   {
+    path: '/redirect', // tagsView用来进行刷新重定向
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index')
+      }
+    ]
+  },
+  {
     path: '/login',
     component: Login
   },
@@ -116,7 +127,7 @@ export const asyncRoutes = [
         title: '用户',
         icon: 'icon-yonghuguanli',
         roles: [2, 3],
-        affix: false
+        affix: false // 固定该路由在tagsView上，true为固定，false为不固定
       }
     }, {
       path: 'roles-manage',
@@ -170,6 +181,18 @@ export const asyncRoutes = [
       }
     }]
   },
+  // {
+  //   path: '/error-log',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'log',
+  //       component: () => import('@/views/error-log/index'),
+  //       name: 'ErrorLog',
+  //       meta: { title: 'Error Log', icon: 'bug' }
+  //     }
+  //   ]
+  // },
   {
     /**
      * 通配符路由必须放在所有路由的最后面

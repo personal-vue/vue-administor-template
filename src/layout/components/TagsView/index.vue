@@ -47,14 +47,15 @@ export default {
       return this.$store.state.tagsView.visitedViews
     },
     routes () {
-      // console.log('this.$store.state.permission: ', this.$store.state.tagView)
       return this.$store.state.permission.addRoutes
     }
   },
   watch: {
-    $route () {
+    $route (newValue) {
       this.addTags()
       this.moveToCurrentTag()
+      // 更新侧边栏选中项
+      this.$store.dispatch('app/updateDefaultOpen', newValue.name)
     },
     visible (value) {
       if (value) {
@@ -77,7 +78,6 @@ export default {
     },
     filterAffixTags (routes, basePath = '/') {
       let tags = []
-      console.log('routes: ', routes)
       routes.forEach(route => {
         if (route.meta && route.meta.affix) {
           const tagPath = path.resolve(basePath, route.path)
@@ -100,8 +100,6 @@ export default {
     initTags () {
       const affixTags = this.affixTags = this.filterAffixTags(this.routes)
 
-      console.log('this.initTags: ', this.routes)
-
       for (const tag of affixTags) {
         // Must have tag name
         if (tag.name) {
@@ -112,9 +110,8 @@ export default {
     addTags () {
       const { name } = this.$route
 
-      console.log('this.$store.state.permission: ', this.$store.state.tagsView)
       if (name) {
-        // console.log('route: ', deepClone(this.$route))
+        // 这里将路由持续化缓存，会报深拷贝错误，目前还没解决
         this.$store.dispatch('tagsView/addView', this.$route)
       }
       return false
@@ -159,7 +156,6 @@ export default {
     },
     closeAllTags (view) {
       this.$store.dispatch('tagsView/delAllViews').then(({ visitedViews }) => {
-        debugger
         if (this.affixTags.some(tag => tag.path === view.path)) {
           return
         }

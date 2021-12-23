@@ -22,8 +22,6 @@ router.beforeEach(async (to, from, next) => {
     roles = state.user.roles
   })
 
-  debugger
-
   if (hasToken) { // 判断是否有token
     if (to.path === '/login') {
       next({ path: '/' })
