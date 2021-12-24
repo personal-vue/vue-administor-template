@@ -17,7 +17,8 @@
           v-if="menu.children.length !== 1"
           :key="index"
           :index="menu.name">
-          <template slot="title">
+          <template
+            slot="title">
             <i :class="['iconfont ', menu.meta.icon]"></i>
             <span slot="title">{{ menu.meta.title }}</span>
           </template>
@@ -97,22 +98,10 @@ export default {
   width: 15vw;
   min-height: 400px;
 }
-
-.el-menu-vertical-demo /deep/ .el-submenu .el-submenu__title {
-  height: 2rem !important;
-}
-/deep/ .el-menu-item,
-.el-submenu__title {
-  height: 2rem !important;
-  line-height: 2rem !important;
-}
-.el-menu-item-group__title {
-  padding: 0;
+.el-menu--collapse {
+  width: 88px;
 }
 /deep/ .el-menu-item-group__title {
   padding: unset;
-}
-.el-menu-item {
-  min-width: unset !important;
 }
 </style>
