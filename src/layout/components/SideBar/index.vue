@@ -99,12 +99,12 @@ export default {
 }
 
 .el-menu-vertical-demo /deep/ .el-submenu .el-submenu__title {
-  height: 2rem;
+  height: 2rem !important;
 }
 /deep/ .el-menu-item,
 .el-submenu__title {
-  height: 2rem;
-  line-height: 2rem;
+  height: 2rem !important;
+  line-height: 2rem !important;
 }
 .el-menu-item-group__title {
   padding: 0;
@@ -113,6 +113,6 @@ export default {
   padding: unset;
 }
 .el-menu-item {
-  min-width: unset;
+  min-width: unset !important;
 }
 </style>

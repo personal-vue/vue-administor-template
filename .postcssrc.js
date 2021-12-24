@@ -7,7 +7,7 @@ module.exports = {
     // to edit target browsers: use "browserslist" field in package.json
     "autoprefixer": {},
     'postcss-pxtorem': {
-      rootValue: 32, //结果为：比如元素宽320px,最终页面会换算成 10rem
+      rootValue: 16, // 要和rem.js文件中设置的基本保持一致
       propList: ['*']
     }
   }
